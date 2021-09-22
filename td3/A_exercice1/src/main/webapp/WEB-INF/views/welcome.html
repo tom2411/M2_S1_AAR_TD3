@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue</title>
+</head>
+<body>
+Bienvenue, <span th:text="${username}"/>.
+
+<form th:action="@{/logout}">
+    <button type="submit">se déconnecter</button>
+</form>
+
+<form th:action="@{/simplecheck}">
+    <button type="submit">Vérifier le login en session (en trace de serveur)</button>
+</form>
+
+<div th:replace="session::session"></div>
+
+</body>
+</html>

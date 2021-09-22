@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Infos Session</title>
+</head>
+<body>
+
+<div th:fragment="session" style="display:block; border: solid thin darkblue;">
+    <!-- avec des th:if -->
+    Le login stocké en session est :
+    <span th:if="${courant != null}" th:text="${courant}"/>
+    <span th:if="${courant == null}">Pas de login stocké en session</span>
+
+    <br>
+    <!-- avec test directement dans texte... -->
+    Le login stocké en session est :
+    <span th:text="(${courant != null}? ${courant} : 'Pas de login stocké en session')"/>
+
+</div>

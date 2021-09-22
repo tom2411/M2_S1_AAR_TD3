@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue</title>
+</head>
+<body>
+Bienvenue, <span th:text="${username}"/>.
+
+<h2>Messages reçus</h2>
+
+<ul>
+    <li th:each="msg : ${received}" th:text="'De '+${msg.from.login}+' ('+${#temporals.format(msg.msgDate,'dd/MM/yyyy à HH:mm:ss')}+') : '+${msg.text}">message...</li>
+</ul>
+
+<h2>Messages émis</h2>
+<ul>
+    <li th:each="msg : ${sent}" th:text="'A '+${msg.to.login}+' ('+${#temporals.format(msg.msgDate,'dd/MM/yyyy à HH:mm:ss')}+') : '+${msg.text}">message...</li>
+</ul>
+
+
+<h2>Messages qui parlent d'AAR</h2>
+
+<ul>
+    <li th:each="msg : ${AAR}" th:text="'De '+${msg.from.login}+' ('+${#temporals.format(msg.msgDate,'dd/MM/yyyy à HH:mm:ss')}+') : '+${msg.text}">message...</li>
+</ul>
+
+<h2>Ecrire un nouveau message</h2>
+<form action="#" method="post" th:action="@{/write}" th:object="${msgDto}" >
+Ecrire à :
+    <select th:field="*{to}">
+        <option th:each="user : ${users} "
+                th:value="${user}"
+                th:text="${user}">un utilisateur...</option>
+    </select>
+Message : <input type="text" th:field="*{text}" minlength="1"/>
+        <button type="submit">Envoyer</button>
+</form>
+
+<form th:action="@{/logout}">
+    <button type="submit">se déconnecter</button>
+</form>
+
+</body>
+</html>

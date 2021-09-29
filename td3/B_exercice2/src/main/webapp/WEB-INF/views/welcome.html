@@ -15,6 +15,10 @@ Bienvenue, <span th:text="${username}"/>.
     <button type="submit">Vérifier le login en session (en trace de serveur)</button>
 </form>
 
+<form th:action="@{/removeuser}">
+    <button type="submit">Supprimer l'user courant</button>
+</form>
+
 <div th:replace="session::session"></div>
 
 </body>

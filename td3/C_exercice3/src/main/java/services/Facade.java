@@ -3,6 +3,7 @@ package services;
 import entities.Message;
 import entities.User;
 import exceptions.UserAllreadyExistsException;
+import exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -50,6 +51,15 @@ public class Facade {
         em.persist(user);
         return user;
    }
+
+    @Transactional
+    public void removeUser(String login) throws UserNotFoundException {
+        User user=em.find(User.class,login);
+        if (user==null) {
+            throw new UserNotFoundException();
+        }
+        em.remove(user);
+    }
 
    @Transactional
    public void createMessage(String strFrom, String strTo, String text){

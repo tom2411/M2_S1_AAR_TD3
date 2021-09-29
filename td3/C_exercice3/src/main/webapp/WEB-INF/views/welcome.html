@@ -30,6 +30,10 @@ Message : <input type="text" th:field="*{text}" minlength="1"/>
         <button type="submit">Envoyer</button>
 </form>
 
+<form th:action="@{/removeuser}">
+    <button type="submit">Se désinscrire</button>
+</form>
+
 <form th:action="@{/logout}">
     <button type="submit">se déconnecter</button>
 </form>

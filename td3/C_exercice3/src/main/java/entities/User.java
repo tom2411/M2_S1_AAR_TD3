@@ -8,10 +8,10 @@ public class User {
     @Id
     private String login;
     private String password;
-    @OneToMany(mappedBy = "from",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "from",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy("msgDate")
     private List<Message> sent;
-    @OneToMany(mappedBy = "to",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "to",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OrderBy("msgDate")
     private List<Message> received;
 

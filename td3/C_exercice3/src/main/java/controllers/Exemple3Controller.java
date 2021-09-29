@@ -3,6 +3,7 @@ package controllers;
 import dtos.MessageDto;
 import dtos.UserDto;
 import exceptions.UserAllreadyExistsException;
+import exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,6 +75,20 @@ public class Exemple3Controller {
         status.setComplete();
         model.addAttribute("courant",null);
         model.addAttribute(new UserDto());
+        return "login";
+    }
+
+    @RequestMapping("removeuser")
+    public String removeUser(@SessionAttribute String courant,Model model){
+        System.out.println(courant);
+        model.addAttribute("username",courant);
+        try {
+            facade.removeUser(courant);
+            model.addAttribute("courant",null);
+            model.addAttribute(new UserDto());
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+        }
         return "login";
     }
 

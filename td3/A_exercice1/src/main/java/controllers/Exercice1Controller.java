@@ -34,6 +34,7 @@ public class Exercice1Controller {
             // on place courant dans le modèle, mais il s'agit d'un attribut de session, il se retrouve ainsi conservé en session
             model.addAttribute("courant", userDto.getLogin());
             model.addAttribute("username", userDto.getLogin());
+            model.addAttribute("users", facade.getAllUsers());
             return "welcome";
         } else {
             // on crée à la volée un "ObjectError" : erreur globale dans l'objet (ici l'objet c'est l'instance de user où transitent les infos de login)
@@ -48,6 +49,7 @@ public class Exercice1Controller {
     public String simpleCheck(@SessionAttribute String courant,Model model){
         System.out.println(courant);
         model.addAttribute("username",courant);
+        model.addAttribute("users", facade.getAllUsers());
         return "welcome";
     }
 

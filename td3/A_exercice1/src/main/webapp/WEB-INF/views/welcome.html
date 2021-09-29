@@ -15,6 +15,12 @@ Bienvenue, <span th:text="${username}"/>.
     <button type="submit">Vérifier le login en session (en trace de serveur)</button>
 </form>
 
+<ul>
+    <th:block th:each="user : ${users}">
+        <li th:text="'login =' + ${user.login} + ', mdp = ' +${user.password} "></li>
+    </th:block>
+</ul>
+
 <div th:replace="session::session"></div>
 
 </body>

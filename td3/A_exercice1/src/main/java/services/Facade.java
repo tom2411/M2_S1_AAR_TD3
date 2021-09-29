@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.Collection;
 
 @Service
 public class Facade {
@@ -34,6 +36,11 @@ public class Facade {
             return (user.getPassword().equals(password));
         }
    }
+
+    public Collection<User> getAllUsers() {
+        Query query = em.createQuery("SELECT u FROM User u", User.class);
+        return (Collection<User>) query.getResultList();
+    }
 
 
 }

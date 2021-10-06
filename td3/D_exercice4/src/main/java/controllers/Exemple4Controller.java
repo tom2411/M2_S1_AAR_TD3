@@ -2,16 +2,14 @@ package controllers;
 
 import dtos.MessageDto;
 import dtos.UserDto;
+import entities.Message;
 import exceptions.UserAllreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import services.Facade;
 
@@ -86,6 +84,14 @@ public class Exemple4Controller {
         return "welcome";
     }
 
+    @GetMapping("filtre")
+    public String filtrer(@SessionAttribute String courant,@RequestParam String motif, Model model){
+        for (Message m : facade.findByMotif(motif)){
+            System.out.println(m.getText());
+        }
+        return simpleCheck(courant, model);
+    }
+
     /**
      * cette méthode privée évite d'insérer les éléments liées aux messages (existants et nouveaux) dans la page welcome.
      * Quand vous serez à l'aise avec Spring MVC, regardez du côté de @ModelAttribute...
@@ -99,5 +105,6 @@ public class Exemple4Controller {
         model.addAttribute("msgDto",new MessageDto());
         model.addAttribute("AAR",facade.findByTextAAR());
     }
+
 
 }

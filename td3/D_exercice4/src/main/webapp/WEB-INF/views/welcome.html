@@ -41,5 +41,10 @@ Message : <input type="text" th:field="*{text}" minlength="1"/>
     <button type="submit">se déconnecter</button>
 </form>
 
+<form th:action="@{/filtre}">
+    <input name="motif" type="text">
+    <button type="submit">filtrer!</button>
+</form>
+
 </body>
 </html>

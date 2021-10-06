@@ -74,4 +74,10 @@ public class Facade {
         return q.getResultList();
     }
 
+    public List<Message> findByMotif(String motif) {
+        Query q=em.createQuery("Select m From Message m where lower(m.text) like :m");
+        q.setParameter("m", "%"+motif.toLowerCase()+"%");
+        return q.getResultList();
+    }
+
 }
